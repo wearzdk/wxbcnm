@@ -9,15 +9,18 @@ if(!storage.contains('init')){
     alert('请注意' ,'在继续之前，请先确保已经给与悬浮窗权限并已经锁定后台以确保稳定运行')
     storage.put('init' ,0)
 }
+launch("com.net.zdsoft.netstudy.netstudy_v5_mobile_app")
 //检查无障碍服务是否启动
 if(auto.service == null){
     alert("需要无障碍服务" ,"脚本运行需要无障碍服务，请选择“网课自动脚本”，开启无障碍服务，仅用于模拟点击，不用于其它用途，请放心使用")
     auto.waitFor()
+    launch("com.net.zdsoft.netstudy.netstudy_v5_mobile_app")
 }
 //运行课后网app，通过包名启动
 sleep(2000)
-launch("com.net.zdsoft.netstudy.netstudy_v5_mobile_app")
 toast("脚本启动")
+launch("com.net.zdsoft.netstudy.netstudy_v5_mobile_app")
+launchApp("课后网")
 for(;;){
     //判断界面是否为主界面
     if(currentActivity() == "net.zdsoft.netstudy.PhoneCenterActivity"){
@@ -41,7 +44,9 @@ for(;;){
             if(currentActivity() !="vizpower.imeeting.MainActivity"){break;}//离开课堂界面跳出循环
                 if(id("rollcall_sliderblock_inside_arrow_animate").exists()){
                     var b = id("rollcall_sliderblock_layout").findOne().bounds()
+                    device.vibrate(1000)//振动提醒，一秒
                     swipe(b.centerX(), b.centerY(), b.centerX() + 1300, b.centerY(), 3750)//获取滑动组件位置，基于坐标滑动，时间3.75秒
+                    toast('尝试签到完成')
                 }
         }
     }
