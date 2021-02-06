@@ -10,6 +10,8 @@ if(!storage.contains('init')){
     storage.put('init' ,0)
 }
 launch("com.net.zdsoft.netstudy.netstudy_v5_mobile_app")
+toast("请稍等")
+sleep(5000)//等待无限宝彻底启动
 //检查无障碍服务是否启动
 if(auto.service == null){
     alert("需要无障碍服务" ,"脚本运行需要无障碍服务，请选择“网课自动脚本”，开启无障碍服务，仅用于模拟点击，不用于其它用途，请放心使用")
@@ -17,7 +19,6 @@ if(auto.service == null){
     launch("com.net.zdsoft.netstudy.netstudy_v5_mobile_app")
 }
 //运行课后网app，通过包名启动
-sleep(2000)
 toast("脚本启动")
 launch("com.net.zdsoft.netstudy.netstudy_v5_mobile_app")
 launchApp("课后网")
@@ -42,7 +43,7 @@ for(;;){
         }
         for(;;){
             if(currentActivity() !="vizpower.imeeting.MainActivity"){break;}//离开课堂界面跳出循环
-                if(id("rollcall_sliderblock_inside_arrow_animate").exists()){
+                if(id("rollcall_sliderblock_layout").exists()){
                     var b = id("rollcall_sliderblock_layout").findOne().bounds()
                     device.vibrate(1000)//振动提醒，一秒
                     swipe(b.centerX(), b.centerY(), b.centerX() + 1300, b.centerY(), 3750)//获取滑动组件位置，基于坐标滑动，时间3.75秒
