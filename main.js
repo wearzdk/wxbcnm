@@ -9,6 +9,12 @@ if(!storage.contains('init')){
     alert('请注意' ,'在继续之前，请先确保已经给与悬浮窗权限并已经锁定后台以确保稳定运行')
     storage.put('init' ,0)
 }
+var scnum = 0
+if (device.height > device.width) {
+    scnum = device.height * 0.51
+}else{
+    scnum = device.width * 0.51
+}
 launch("com.net.zdsoft.netstudy.netstudy_v5_mobile_app")
 toast("请稍等")
 sleep(5000)//等待无限宝彻底启动
@@ -45,8 +51,8 @@ for(;;){
             if(currentActivity() !="vizpower.imeeting.MainActivity"){break;}//离开课堂界面跳出循环
                 if(id("rollcall_sliderblock_layout").exists()){
                     var b = id("rollcall_sliderblock_layout").findOne().bounds()
+                    swipe(b.centerX(), b.centerY(), b.centerX() + scnum, b.centerY() + 10, 3760)//获取滑动组件位置，基于坐标滑动，时间3.75秒
                     device.vibrate(1000)//振动提醒，一秒
-                    swipe(b.centerX(), b.centerY(), b.centerX() + 1300, b.centerY(), 3750)//获取滑动组件位置，基于坐标滑动，时间3.75秒
                     toast('尝试签到完成')
                 }
         }
