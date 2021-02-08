@@ -23,3 +23,6 @@ while 1 == 1:
             playsound.playsound(path)
             print('签到时间！！！')
             count = count + 1
+
+    else:
+        print(time.strftime("%H:%M:%S", time.localtime()), html['reason'])
