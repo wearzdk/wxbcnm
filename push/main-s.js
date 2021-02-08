@@ -12,6 +12,17 @@ if(html['state'] == 'ok'){
 }else{
     alert('错误',html['reason'])
 }
+if (confirm('要执行一次测试吗？')) {
+    var res = http.post(url,{'action':'subtime','key':html['key']})
+    var sut = res.body.json()
+    log(sut)
+    if(sut['state'] == 'ok'){
+        toast('请求发送成功')
+        sleep(500)
+    }else{
+        alert('错误',sut['reason'])
+    }
+}
 launch("com.net.zdsoft.netstudy.netstudy_v5_mobile_app")
 sleep(5000)
 //检查无障碍服务是否启动
